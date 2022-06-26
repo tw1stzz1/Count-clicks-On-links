@@ -1,6 +1,8 @@
 import requests
 import os
+import argparse
 from urllib.parse import urlparse
+from dotenv import load_dotenv
 
 
 def shorten_link(token, long_url):
@@ -26,8 +28,10 @@ def count_clicks(token, bitlink):
 
 
 if __name__ == "__main__":
+    load_dotenv()
     token = os.getenv("BITLY_TOKEN")
-    url = input("Введите адрес ")
+    url = argparse.ArgumentParser()
+    url.add_argument('name', nargs='?')
 
     try:
         try:
