@@ -12,6 +12,11 @@ Python3 должен быть уже установлен.
 pip install -r requirements.txt
 ```
 
+### Пример запуска кода
+```
+python main.py ваша ссылка/уже сокращенная ссылка
+```
+
 ### Цель проекта
 
 Код написан в образовательных целях на онлайн-курсе для веб-разработчиков [dvmn.org](https://dvmn.org/).
@@ -29,6 +34,11 @@ Python3 should be already installed.
 Then use `pip` (or `pip3`, if there is a conflict with Python2) to install dependencies:
 ```
 pip install -r requirements.txt
+```
+
+### Code run exemple
+```
+python main.py your link/your shorted link
 ```
 
 ### Project Goals
