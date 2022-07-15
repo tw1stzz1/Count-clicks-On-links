@@ -4,8 +4,12 @@
 
 ### Как установить
 
-Для работы проекту нужен токен. Для его получения нужно зарегистрироваться на [официальном сайте](https://bitly.com/pages/pricing), затем в настройках получить токен и положить его в env файл.
-
+Для работы проекту нужен токен. Для его получения нужно зарегистрироваться на [официальном сайте](https://bitly.com/pages/pricing), 
+затем в настройках получить токен и положить его в env файл.
+Пример .env файла:
+```
+BITLY-TOKEN=ваш токен
+```
 Python3 должен быть уже установлен. 
 Затем используйте `pip` (или `pip3`, есть конфликт с Python2) для установки зависимостей:
 ```
@@ -28,8 +32,12 @@ A project that allows you to shorten links using [bitly](https://dev.bitly.com)
 
 ### How to install
 
-The project needs a token to work. To get it, you need to register on the [official website] (https://bitly.com/pages/pricing), then get a token in the settings and put it in the env file.
-
+The project needs a token to work. To get it, you need to register on the [official website] (https://bitly.com/pages/pricing), 
+then get a token in the settings and put it in the env file.
+.env file exemple:
+```
+BITLY-TOKEN=your token
+```
 Python3 should be already installed. 
 Then use `pip` (or `pip3`, if there is a conflict with Python2) to install dependencies:
 ```
