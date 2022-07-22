@@ -8,7 +8,7 @@
 затем в настройках получить токен и положить его в env файл.
 Пример .env файла:
 ```
-BITLY-TOKEN=ваш токен
+BITLY_TOKEN=ваш токен
 ```
 Python3 должен быть уже установлен. 
 Затем используйте `pip` (или `pip3`, есть конфликт с Python2) для установки зависимостей:
@@ -36,7 +36,7 @@ The project needs a token to work. To get it, you need to register on the [offic
 then get a token in the settings and put it in the env file.
 .env file exemple:
 ```
-BITLY-TOKEN=your token
+BITLY_TOKEN=your token
 ```
 Python3 should be already installed. 
 Then use `pip` (or `pip3`, if there is a conflict with Python2) to install dependencies:
