@@ -6,13 +6,13 @@ import requests
 from dotenv import load_dotenv
 
 
-def shorten_link(token, parse_user_url):
+def shorten_link(bitly_token, argparse):
     url = "https://api-ssl.bitly.com/v4/shorten"
     body = {
-        "long_url": parse_user_url
+        "long_url": argparse
     }
     headers = {
-        "Authorization": "Bearer {}".format(token)
+        "Authorization": "Bearer {}".format(bitly_token)
     }
     response = requests.post(url, json=body, headers=headers)
     response.raise_for_status()
@@ -20,10 +20,10 @@ def shorten_link(token, parse_user_url):
     return response.json()["link"]
 
 
-def count_clicks(token, bitlink):
+def count_clicks(bitly_token, bitlink):
     parsed_bitlink = urlparse(bitlink)
     url = "https://api-ssl.bitly.com/v4/bitlinks/{netloc}{path}/clicks/summary"
-    header = {"Authorization": "Bearer {}".format(token)}
+    header = {"Authorization": "Bearer {}".format(bitly_token)}
 
     response = requests.get(url.format(
         netloc=parsed_bitlink.netloc,
@@ -34,37 +34,33 @@ def count_clicks(token, bitlink):
     return response.json()["total_clicks"]
 
 
-def is_bitlink(parse_user_url, token):
-    header = {"Authorization" : "Bearer {}".format(token)}
-    url = f"https://api-ssl.bitly.com/v4/bitlinks/{parse_user_url}"
-    
+def is_bitlink(argparse, bitly_token):
+    header = {"Authorization": "Bearer {}".format(bitly_token)}
+    url = f"https://api-ssl.bitly.com/v4/bitlinks/{argparse}"
     response = requests.get(url, headers=header)
     return response.ok
 
 if __name__ == "__main__":
     load_dotenv()
-    token = os.getenv("BITLY_TOKEN")
-    parse_user_url = argparse.ArgumentParser(
+    bitly_token = os.getenv("BITLY_TOKEN")
+    argparse = argparse.ArgumentParser(
         description="Code that allows\
         you to shorten links using Bitly"
     )
-    parse_user_url.add_argument('--url')
-    
-    args = parse_user_url.parse_args()
-    
-    parse_url= urlparse(args.url)
-    
-    if parse_url.scheme:
-        parse_user_url = args.url
-    else:
-        parse_user_url = f"https://{args.url}"
-    
+    argparse.add_argument('--url')
+    args = argparse.parse_args()
+
+    parsed_url = urlparse(args.url)
+
+    if not parsed_url.scheme:
+        argparse = f"https://{args.url}"
+
     try:
-        if is_bitlink(parse_user_url, token): 
-            clicks_count = count_clicks(token, parse_user_url)
+        if is_bitlink(argparse, bitly_token):
+            clicks_count = count_clicks(bitly_token, argparse)
             print("Клики по ссылке = {}".format(clicks_count))
         else:
-            bitlink = shorten_link(token, parse_user_url)
+            bitlink = shorten_link(bitly_token, argparse)
             print(bitlink)
     except requests.exceptions.HTTPError as error:
         print(error, "Что-то пошло не так...\nSomething went wrong...")
