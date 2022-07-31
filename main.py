@@ -37,11 +37,12 @@ def count_clicks(bitly_token, bitlink):
 
 
 def is_bitlink(parser, bitly_token):
-    header = {"Authorization" : "Bearer {}".format(bitly_token)}
+    header = {"Authorization": "Bearer {}".format(bitly_token)}
     url = f"https://api-ssl.bitly.com/v4/bitlinks/{parser}"
-    
+
     response = requests.get(url, headers=header)
     return response.ok
+
 
 if __name__ == "__main__":
     load_dotenv()
@@ -51,15 +52,14 @@ if __name__ == "__main__":
         you to shorten links using Bitly"
     )
     parser.add_argument('--url')
-    
+
     args = parser.parse_args()
-    
+
     parse_url = urlparse(args.url)
     parser = args.url
 
-    
     try:
-        if is_bitlink(parser, bitly_token): 
+        if is_bitlink(parser, bitly_token):
             clicks_count = count_clicks(bitly_token, parser)
             print("Клики по ссылке = {}".format(clicks_count))
         else:
