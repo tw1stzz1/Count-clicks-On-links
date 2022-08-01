@@ -55,7 +55,6 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    parse_url = urlparse(args.url)
     user_url = args.url
 
     try:
